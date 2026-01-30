@@ -1,0 +1,269 @@
+:root{
+  --pink-1:#ffd6e8;
+  --pink-2:#ff9bb3;
+  --accent:#ff4666;
+  --white:#ffffff;
+  --card-bg: #fff9fb;
+  --soft-shadow: 0 8px 24px rgba(255,70,102,0.12);
+  --touch-size:48px;
+  font-family: "Inter",-apple-system,system-ui,Segoe UI, Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+html,body,#stage{height:100%;margin:0}
+body{
+  background: linear-gradient(160deg,var(--pink-1),var(--pink-2));
+  -webkit-font-smoothing:antialiased;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+/* Stage */
+.stage{
+  width:100%;
+  max-width:420px;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+
+/* Gift (box style) - larger and simplified to show only the box image */
+.gift{
+  width:280px;
+  height:280px;
+  background:transparent;
+  border-radius:0;
+  border:none;
+  box-shadow:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  cursor:pointer;
+  transition:transform .28s ease,opacity .28s ease;
+  touch-action:manipulation;
+  position:relative;
+  overflow:visible;
+}
+.gift:active{transform:translateY(3px) scale(.996)}
+/* Lid */
+.gift-lid{
+  width:100%;
+  height:62px;
+  background:linear-gradient(180deg,var(--accent),#ff6a80);
+  border-top-left-radius:14px;
+  border-top-right-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  box-shadow:inset 0 -6px 18px rgba(255,255,255,0.06), 0 8px 18px rgba(139,30,58,0.08);
+}
+.lid-top{position:absolute;left:6px;right:6px;top:8px;height:10px;background:rgba(255,255,255,0.08);border-radius:6px}
+.gift-bow{width:44px;height:44px;opacity:1;filter:drop-shadow(0 6px 8px rgba(0,0,0,0.08))}
+
+/* Box body */
+.gift-body{
+  flex:1;
+  width:100%;
+  background:linear-gradient(180deg,#ffdfe8,#fff7fb);
+  border-bottom-left-radius:14px;
+  border-bottom-right-radius:14px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  padding:18px 10px 16px;
+  box-shadow:inset 0 8px 24px rgba(255,70,102,0.04);
+}
+
+/* Ribbon - vertical */
+.vertical-ribbon{
+  position:absolute;
+  top:44px;
+  bottom:20px;
+  left:calc(50% - 14px);
+  width:28px;
+  background:linear-gradient(180deg,#ff3b61,#d33152);
+  border-radius:8px;
+  box-shadow:0 6px 18px rgba(195,25,60,0.12);
+  pointer-events:none;
+  transform:translateZ(0);
+}
+
+/* Question mark and play icon sit above ribbon */
+.gift-question{
+  font-size:56px;
+  color:var(--white);
+  font-weight:800;
+  line-height:1;
+  text-shadow:0 6px 18px rgba(139,30,58,0.25);
+  z-index:2;
+}
+.play-icon{
+  position:absolute;
+  bottom:10px;
+  right:10px;
+  font-size:20px;
+  background:rgba(255,255,255,0.95);
+  width:var(--touch-size);
+  height:var(--touch-size);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 20px rgba(0,0,0,0.09);
+  z-index:3;
+}
+
+/* Card */
+.card{
+  width:92%;
+  max-width:360px;
+  border-radius:18px;
+  background:linear-gradient(180deg,var(--card-bg),#fff);
+  box-shadow:0 10px 40px rgba(0,0,0,0.12);
+  padding:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:absolute;
+  transform:translateY(20px) scale(.98);
+  opacity:0;
+  transition:opacity .36s ease,transform .36s ease;
+  touch-action:none;
+}
+.card.show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+.card-inner{width:100%;text-align:center;padding:6px}
+.card-top-embellish{display:flex;justify-content:center;margin:6px auto;position:relative;height:220px;width:220px}
+.slideshow{width:220px;height:220px;border-radius:18px;overflow:hidden;display:block;box-shadow:0 14px 40px rgba(176,42,82,0.12);border:4px solid rgba(255,255,255,0.6);margin:0 auto}
+.slide{
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  border-radius:12px;
+  opacity:0;
+  transform:scale(1.02);
+  transition:opacity .6s cubic-bezier(.2,.9,.3,1), transform .6s cubic-bezier(.2,.9,.3,1);
+  display:block;
+  pointer-events:none;
+  margin:0 auto;
+}
+.slide.visible{
+  opacity:1;
+  transform:scale(1);
+}
+.card.show .slide{
+  /* small entrance delay handled in JS; keep for consistent reveal */
+}
+.greeting{
+  margin:6px 0 8px;
+  font-size:20px;
+  color:var(--accent);
+  font-weight:700;
+  line-height:1.1;
+}
+.lang{font-weight:500;color:#b02a52;font-size:14px}
+.message{
+  margin:0 0 12px;
+  color:#7a3b4a;
+  font-size:15px;
+  line-height:1.4;
+  padding:0 8px;
+}
+.card-footer{display:flex;justify-content:center}
+.btn{
+  background:transparent;
+  border:1px solid rgba(139,30,58,0.12);
+  padding:8px 14px;
+  border-radius:12px;
+  font-size:14px;
+  color:#8b1e3a;
+  cursor:pointer;
+  min-width:88px;
+}
+
+/* Hidden utility */
+.hidden{display:none}
+
+/* Floating hearts */
+.hearts{position:absolute;left:0;right:0;bottom:0;top:0;pointer-events:none;overflow:hidden}
+.heart{
+  position:absolute;
+  bottom:-48px;
+  width:28px;
+  height:28px;
+  transform-origin:center bottom;
+  opacity:0;
+  will-change:transform,opacity;
+}
+.heart svg{width:100%;height:100%}
+
+/* subtle fade/slide for elements */
+.fade-slide-up{
+  animation:fadeSlide .48s cubic-bezier(.2,.9,.3,1) both;
+}
+@keyframes fadeSlide{
+  from{opacity:0; transform:translateY(8px)}
+  to{opacity:1; transform:translateY(0)}
+}
+
+/* Responsive adjustments for mobile (single-screen) */
+@media (max-height:700px){
+  .gift{width:180px;height:180px;border-radius:16px}
+  .gift-question{font-size:54px}
+  .play-icon{width:44px;height:44px}
+  .heart{width:22px;height:22px}
+}
+
+/* Image version of the gift box */
+.gift-image{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  border-radius:0;
+  display:block;
+  pointer-events:none;
+  user-select:none;
+  transition:opacity .28s ease, transform .28s ease;
+  opacity:1;
+}
+/* when gift is visually hidden we also fade the image */
+.gift.hidden .gift-image,
+.gift[aria-hidden="true"] .gift-image{
+  opacity:0;
+  transform:scale(.98) translateY(6px);
+}
+
+/* ensure play icon sits above the image */
+.play-icon{
+  position:absolute;
+  bottom:12px;
+  right:12px;
+  font-size:20px;
+  background:rgba(255,255,255,0.95);
+  width:var(--touch-size);
+  height:var(--touch-size);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 20px rgba(0,0,0,0.09);
+  z-index:6;
+}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Valentine Surprise</title>
+  <script type="importmap">
+  {
+    "imports": {}
+  }
+  </script>
+</head>
+<body>
+  <main class="stage" id="stage">
+    <!-- Gift Box (initial) - now uses provided image -->
+    <button id="gift" class="gift" aria-label="Open surprise">
+      <img src="p/pngtree-cute-3d-gift-box-special-valentine-png-image_11368904-removebg-preview.png" alt="กล่องของขวัญ" class="gift-image" />
+    </button>
+
+    <!-- Card (hidden initially) -->
+    <section id="card" class="card hidden" role="region" aria-live="polite">
+      <div class="card-inner">
+        <div class="card-top-embellish slideshow" aria-hidden="false">
+          <img class="slide visible" src="p/35246.jpg" alt="ดอกไม้ - รูปที่ 1" />
+          <img class="slide" src="p/35259.jpg" alt="รูปที่ 2" />
+          <img class="slide" src="p/35256.jpg" alt="รูปที่ 3" />
+        </div>
+        <h1 class="greeting">ขอโทษนะครับ<br/><span class="lang">ที่ทำให้ฟางเสียใจ</span></h1>
+        <p class="message">พีมจะพยายามเป็นคนที่ดีกว่านี้ให้สมกับความรักที่ฟางให้
+ถ้าฟางยังพอมีที่ว่างให้พีม พีมอยากอยู่ข้างๆ ฟางต่อไปนะครับ</p>
+        <div class="card-footer">
+          <button id="closeCard" class="btn" type="button" aria-label="ปิดการ์ด">Close ✨</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floating hearts container -->
+    <div id="hearts" class="hearts" aria-hidden="true"></div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
